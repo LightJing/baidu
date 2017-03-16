@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 01</title>
+</head>
+<body>
+
+<h3>污染城市列表</h3>
+<ul id="aqi-list">
+    <!--
+        <li>第一名：福州（样例），10</li>
+          <li>第二名：福州（样例），10</li> -->
+</ul>
+
+<script type="text/javascript">
+
+    var aqiData = [
+        ["北京", 90],
+        ["上海", 50],
+        ["福州", 10],
+        ["广州", 50],
+        ["成都", 90],
+        ["西安", 100]
+    ];
+
+    (function () {
+
+        /*
+         在注释下方编写代码
+         遍历读取aqiData中各个城市的数据
+         将空气质量指数大于60的城市显示到aqi-list的列表中
+         */
+
+
+        //获取空气质量指数大于60的数据
+        function filterFunc() {
+            //arguments[0][1]表示输入数组元素的第二个值
+            return arguments[0][1]>60;
+        }
+
+        //过滤后的数据放入新的数组中
+        var filterData = aqiData.filter(filterFunc);    //filter的传入参数为，元素，索引值，数组本身
+
+        //将数组中的数据降序排列
+        filterData.sort(function () {
+            return arguments[1][1]-arguments[0][1];
+        })
+
+
+        //将数据插入列表中
+        function add() {
+            //名次，为数组索引值加1
+            var id = arguments[1]+1;
+            //创建一个列表节点
+            var liNode = document.createElement("li");
+            //文本内容
+            var txt = "第" + id + "名：" + arguments[0][0] + "," + arguments[0][1];
+            //添加到列表中
+            liNode.innerText = txt;
+            document.getElementById("aqi-list").appendChild(liNode);
+
+        }
+
+        //将过滤后的数据依次遍历插入
+        filterData.forEach(add);
+
+
+    })();
+
+</script>
+</body>
+</html>
