@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .listyle{
+            display: block;
+            height: 36px;
+            line-height: 36px;
+            width: 50px;
+            background-color: aqua;
+            text-align: center;
+            margin: 5px;
+            float: left;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <p>请输入插入数组的数字</p>
+    <input type="text" id="data">
+    <input type="button" id="addLeft" value="左插入">
+    <input type="button" id="addRight" value="右插入">
+    <input type="button" id="deleteLeft" value="左侧出">
+    <input type="button" id="deleteRight" value="右侧出">
+</div>
+<div>
+    <ul id="show">
+
+    </ul>
+</div>
+<script>
+    //创建一个数组
+    var data = new Array;
+
+    //获取用户输入的字符
+    var node = document.getElementById("data");
+
+    //获取显示列表节点
+    var ulnode = document.getElementById("show");
+
+    //将data数组中的数字队列显示
+    function showdata(data) {
+        //删除已显示的数字
+        while(ulnode.hasChildNodes()){
+            ulnode.removeChild(ulnode.firstChild);
+        }
+
+        //将数组重新列出
+        data.forEach(function () {
+            var linode = document.createElement("li");
+            var txt = arguments[0];
+            linode.innerHTML = txt;
+            linode.setAttribute("class","listyle");
+            ulnode.appendChild(linode);
+        })
+
+    }
+
+    //队列中左边插入输入的数字
+    function addLeft() {
+        var num =node.value;
+        if(isNaN(num)){
+            alert("请输入数字");
+        }else {
+            data.unshift(num);
+            showdata(data);
+        }
+    }
+
+    //给左插入按钮绑定点击事件
+    function button1(){
+        document.getElementById("addLeft").onclick = addLeft;
+
+    }
+
+    //队列中右边插入输入的数字
+    function addRight() {
+        var num =node.value;
+        if(isNaN(num)){
+            alert("请输入数字");
+        }else {
+            data.push(num);
+            showdata(data);
+        }
+    }
+
+    //给右插入按钮绑定点击事件
+    function button2() {
+        document.getElementById("addRight").onclick = addRight;
+
+    }
+
+    //队列中左边输出
+    function deleteLeft() {
+        var num = data.shift();
+        showdata(data);
+        alert(num);
+
+    }
+
+    //给左侧出按钮绑定点击事件
+    function button3() {
+        document.getElementById("deleteLeft").onclick = deleteLeft;
+
+    }
+
+    //队列中右边输出
+    function deleteRight() {
+        var num = data.pop();
+        showdata(data);
+        alert(num);
+
+    }
+
+    //给右侧出按钮绑定点击事件
+    function button4() {
+        document.getElementById("deleteRight").onclick = deleteRight;
+    }
+
+    function init() {
+        button1();
+        button2();
+        button3();
+        button4();
+    }
+
+    init();
+</script>
+</body>
+</html>
