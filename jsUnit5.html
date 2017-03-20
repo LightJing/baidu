@@ -121,13 +121,6 @@
             bubblesort();
         }
     }
-
-    //给左插入按钮绑定点击事件
-    function button1(){
-        document.getElementById("addLeft").onclick = addLeft;
-
-    }
-
     //队列中右边插入输入的数字
     function addRight() {
         var num =node.value;
@@ -137,13 +130,6 @@
             resort(data);
         }
     }
-
-    //给右插入按钮绑定点击事件
-    function button2() {
-        document.getElementById("addRight").onclick = addRight;
-
-    }
-
     //队列中左边输出
     function deleteLeft() {
         var num = data.shift();
@@ -152,13 +138,6 @@
         alert(num);
 
     }
-
-    //给左侧出按钮绑定点击事件
-    function button3() {
-        document.getElementById("deleteLeft").onclick = deleteLeft;
-
-    }
-
     //队列中右边输出
     function deleteRight() {
         var num = data.pop();
@@ -168,6 +147,21 @@
 
     }
 
+    //给左插入按钮绑定点击事件
+    function button1(){
+        document.getElementById("addLeft").onclick = addLeft;
+
+    }
+    //给右插入按钮绑定点击事件
+    function button2() {
+        document.getElementById("addRight").onclick = addRight;
+
+    }
+    //给左侧出按钮绑定点击事件
+    function button3() {
+        document.getElementById("deleteLeft").onclick = deleteLeft;
+
+    }
     //给右侧出按钮绑定点击事件
     function button4() {
         document.getElementById("deleteRight").onclick = deleteRight;
