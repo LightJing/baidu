@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>任务五</title>
     <style>
         .listyle{
             display: block;
@@ -30,7 +30,7 @@
 </div>
 <script>
     //创建一个数组
-    var data = new Array;
+    var data = ["33","97","45","11","77","65"];
 
     //获取用户输入的字符
     var node = document.getElementById("data");
@@ -60,47 +60,56 @@
     }
 
     //将data数组中的数字队列显示
-    function showdata(data) {
-        //删除已显示的数字
-        while(ulnode.hasChildNodes()){
-            ulnode.removeChild(ulnode.firstChild);
-        }
+    function showdata() {
+        if(data.length > 0 ) {
 
-        //将数组重新列出
-        data.forEach(function (num) {
-            var linode = document.createElement("li");
-            linode.setAttribute("class","listyle");
-            linode.style.marginTop = (100-num)+"px";
-            linode.style.height = num+"px";
-            ulnode.appendChild(linode);
-        })
+            //删除已显示的数字
+            while (ulnode.hasChildNodes()) {
+                ulnode.removeChild(ulnode.firstChild);
+            }
+
+            //将数组重新列出
+            data.forEach(function (num) {
+                var linode = document.createElement("li");
+                linode.setAttribute("class", "listyle");
+                linode.style.marginTop = (100 - num) + "px";
+                linode.style.height = num + "px";
+                ulnode.appendChild(linode);
+            })
+        }
 
     }
     
     //排序
-    function resort(data) {
+    function bubblesort(){
         //将数组的长度先赋值给一个变量，避免了每循环一次，就要去计算一个data.length的值，提高效率
         var stop = data.length;
-        //获取li节点
-        var linodes = ulnode.childNodes;
-        //冒泡排序
-        for(var i=0;i<data.length;i++){
-            for(var j=0;j<stop-1;j++){
-                if (data[j] > data[j + 1]) {
-                    var temp = data[j];
-                    data[j] = data[j + 1];
-                    data[j + 1] = temp;
-                    
-                    //将两个节点的高度随之改变
-                    linodes[j].style.height = data[j] + "px";
-                    linodes[j].style.marginTop = (100 - data[j]) + "px";
-                    linodes[j + 1].style.height = data[j + 1] + "px";
-                    linodes[j + 1].style.marginTop = (100 - data[j + 1]) + "px";
+        var i=0 , j=0;
+
+        //给每一次排序设置时间延长
+        var timer = setInterval(resort,1000);
+
+        //冒泡排序的实现
+        function resort() {
+            if(i<stop){
+                if(j<(stop-i)){
+                    if (data[j] > data[j + 1]) {
+                        var temp = data[j];
+                        data[j] = data[j + 1];
+                        data[j + 1] = temp;
+                        showdata();
+                    }
+                    j++;
+                }else{
+                    i++;
+                    j = 0 ;
                 }
 
+            }else {
+                clearInterval(timer);
+                return ;
             }
         }
-        
     }
 
     //队列中左边插入输入的数字
@@ -109,7 +118,7 @@
         if(judge(num)){
             data.unshift(num);
             showdata(data);
-            resort(data);
+            bubblesort();
         }
     }
 
@@ -124,7 +133,7 @@
         var num =node.value;
         if(judge(num)){
             data.push(num);
-            showdata(data);
+            bubblesort();;
             resort(data);
         }
     }
@@ -138,8 +147,8 @@
     //队列中左边输出
     function deleteLeft() {
         var num = data.shift();
-        showdata(data);
-        resort(data);
+        showdata();
+        bubblesort();
         alert(num);
 
     }
@@ -153,8 +162,8 @@
     //队列中右边输出
     function deleteRight() {
         var num = data.pop();
-        showdata(data);
-        resort(data);
+        showdata();
+        bubblesort();
         alert(num);
 
     }
@@ -165,6 +174,7 @@
     }
 
     function init() {
+        showdata();
         button1();
         button2();
         button3();
